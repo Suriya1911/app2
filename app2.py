@@ -37,7 +37,7 @@ QUOTES = [
 
 # Page config
 st.set_page_config(
-    page_title="Hello,Vidhya Prakash,How are you doing ?",
+    page_title="App",
     page_icon="🔐",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -110,15 +110,15 @@ st.markdown("""
 # Password protection
 def check_password():
     def password_entered():
-        if st.session_state["password"] == "hello":
+        if st.session_state["password"] == "Venkatachalapathi6!":
             st.session_state["password_correct"] = True
             del st.session_state["password"]
         else:
             st.session_state["password_correct"] = False
 
     if "password_correct" not in st.session_state:
-        st.markdown("<h1 class='main-header'>SECURE VAULT</h1>", unsafe_allow_html=True)
-        st.markdown("<p class='sub-header'>Protected Records System</p>", unsafe_allow_html=True)
+        st.markdown("<h1 class='main-header'>Hey Vidhya Prakash, How are you doing?</h1>", unsafe_allow_html=True)
+        st.markdown("<p class='sub-header'>This app belongs to VP!</p>", unsafe_allow_html=True)
         
         # Random quote
         quote = random.choice(QUOTES)
@@ -526,6 +526,7 @@ st.markdown("""
     <p style='font-size: 13px; margin: 0;'>Secure Records System • Protected by encryption</p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
