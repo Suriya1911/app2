@@ -319,15 +319,27 @@ with tab3:
         
         col1, col2, col3, col4 = st.columns(4)
         
-        # 1. Encrypted text
+        # 1. Encrypted text - FIXED
         with col1:
             line_width = 140
             encrypted_text = "ENCRYPTED RECORDS\n" + "="*line_width + "\n\n"
-            encrypted_text += f"{'LOC':<18} | {'NAME':<18} | {'MTH':<10} | {'DT':<4} | {'YR':<4} | {'INT':<7} | {'PD':<7} | {'BAL':<7} | {'BANK':<18} | {'PMT':<11}\n"
+            encrypted_text += f"{'LOC':<18} | {'NAME':<25} | {'MTH':<10} | {'DT':<4} | {'YR':<4} | {'INT':<7} | {'PD':<7} | {'BAL':<7} | {'BANK':<18} | {'PMT':<11}\n"
             encrypted_text += "="*line_width + "\n"
             
             for r in records:
-                encrypted_text += f"{r['place']:<18} | {r['name']:<18} | {r['month']:<10} | {r['initial_date']:<4} | {r['year']:<4} | {r['interest']:<7} | {r['paid']:<7} | {r['balance']:<7} | {r['bank']:<18} | {r['payment_date']:<11}\n"
+                # Truncate and pad to exact column widths
+                loc = r['place'][:18].ljust(18)
+                name = r['name'][:25].ljust(25)
+                month = r['month'][:10].ljust(10)
+                date = r['initial_date'][:4].ljust(4)
+                year = r['year'][:4].ljust(4)
+                interest = r['interest'][:7].ljust(7)
+                paid = r['paid'][:7].ljust(7)
+                balance = r['balance'][:7].ljust(7)
+                bank = r['bank'][:18].ljust(18)
+                pmt = r['payment_date'][:11].ljust(11)
+                
+                encrypted_text += f"{loc} | {name} | {month} | {date} | {year} | {interest} | {paid} | {balance} | {bank} | {pmt}\n"
                 encrypted_text += "-"*line_width + "\n"
             
             st.download_button(
@@ -338,7 +350,7 @@ with tab3:
                 use_container_width=True
             )
         
-        # 2. Encrypted Word
+        # 2. Encrypted Word - FIXED
         with col2:
             html_encrypted = """
             <html>
@@ -348,7 +360,16 @@ with tab3:
                     h1 { text-align: center; color: #2c3e50; font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; }
                     .meta { text-align: center; color: #7f8c8d; margin-bottom: 40px; font-size: 14px; }
                     table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
-                    th, td { border: 1px solid #ADD8E6; padding: 10px 6px; text-align: left; font-size: 10px; word-wrap: break-word; }
+                    th, td { 
+                        border: 1px solid #ADD8E6; 
+                        padding: 10px 6px; 
+                        text-align: left; 
+                        font-size: 10px; 
+                        word-wrap: break-word; 
+                        overflow: hidden; 
+                        text-overflow: ellipsis;
+                        max-width: 0;
+                    }
                     th { background-color: #34495e; color: white; font-weight: 500; white-space: nowrap; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
@@ -380,15 +401,15 @@ with tab3:
             for r in records:
                 html_encrypted += f"""
                     <tr>
-                        <td class='col-location'>{r['place']}</td>
-                        <td class='col-name'>{r['name']}</td>
-                        <td class='col-month'>{r['month']}</td>
+                        <td class='col-location' title='{r['place']}'>{r['place']}</td>
+                        <td class='col-name' title='{r['name']}'>{r['name']}</td>
+                        <td class='col-month' title='{r['month']}'>{r['month']}</td>
                         <td class='col-date'>{r['initial_date']}</td>
                         <td class='col-year'>{r['year']}</td>
                         <td class='col-interest'>{r['interest']}</td>
                         <td class='col-paid'>{r['paid']}</td>
                         <td class='col-balance'>{r['balance']}</td>
-                        <td class='col-bank'>{r['bank']}</td>
+                        <td class='col-bank' title='{r['bank']}'>{r['bank']}</td>
                         <td class='col-payment'>{r['payment_date']}</td>
                     </tr>
                 """
@@ -407,7 +428,7 @@ with tab3:
                 use_container_width=True
             )
         
-        # 3. Decrypted text
+        # 3. Decrypted text - FIXED
         with col3:
             line_width = 140
             decrypted_text = "DECRYPTED RECORDS\n" + "="*line_width + "\n\n"
@@ -415,7 +436,19 @@ with tab3:
             decrypted_text += "="*line_width + "\n"
             
             for r in records:
-                decrypted_text += f"{decrypt(r['place']):<18} | {decrypt(r['name']):<18} | {decrypt(r['month']) if r['month'] else '':<10} | {r['initial_date']:<4} | {r['year']:<4} | {r['interest']:<7} | {r['paid']:<7} | {r['balance']:<7} | {decrypt(r['bank']) if r['bank'] else '':<18} | {r['payment_date']:<11}\n"
+                # Truncate and pad to exact column widths
+                loc = decrypt(r['place'])[:18].ljust(18)
+                name = decrypt(r['name'])[:18].ljust(18)
+                month = (decrypt(r['month']) if r['month'] else '')[:10].ljust(10)
+                date = r['initial_date'][:4].ljust(4)
+                year = r['year'][:4].ljust(4)
+                interest = r['interest'][:7].ljust(7)
+                paid = r['paid'][:7].ljust(7)
+                balance = r['balance'][:7].ljust(7)
+                bank = (decrypt(r['bank']) if r['bank'] else '')[:18].ljust(18)
+                pmt = r['payment_date'][:11].ljust(11)
+                
+                decrypted_text += f"{loc} | {name} | {month} | {date} | {year} | {interest} | {paid} | {balance} | {bank} | {pmt}\n"
                 decrypted_text += "-"*line_width + "\n"
             
             st.download_button(
@@ -426,7 +459,7 @@ with tab3:
                 use_container_width=True
             )
         
-        # 4. Decrypted Word
+        # 4. Decrypted Word - FIXED
         with col4:
             html_decrypted = """
             <html>
@@ -436,7 +469,15 @@ with tab3:
                     h1 { text-align: center; color: #27ae60; font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; }
                     .meta { text-align: center; color: #7f8c8d; margin-bottom: 40px; font-size: 14px; }
                     table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
-                    th, td { border: 1px solid #ADD8E6; padding: 10px 6px; text-align: left; word-wrap: break-word; }
+                    th, td { 
+                        border: 1px solid #ADD8E6; 
+                        padding: 10px 6px; 
+                        text-align: left; 
+                        word-wrap: break-word;
+                        overflow: hidden; 
+                        text-overflow: ellipsis;
+                        max-width: 0;
+                    }
                     th { background-color: #27ae60; color: white; font-weight: 500; white-space: nowrap; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
@@ -468,15 +509,15 @@ with tab3:
             for r in records:
                 html_decrypted += f"""
                     <tr>
-                        <td class='col-location'>{decrypt(r['place'])}</td>
-                        <td class='col-name'>{decrypt(r['name'])}</td>
-                        <td class='col-month'>{decrypt(r['month']) if r['month'] else ''}</td>
+                        <td class='col-location' title='{decrypt(r['place'])}'>{decrypt(r['place'])}</td>
+                        <td class='col-name' title='{decrypt(r['name'])}'>{decrypt(r['name'])}</td>
+                        <td class='col-month' title='{decrypt(r['month']) if r['month'] else ''}'>{decrypt(r['month']) if r['month'] else ''}</td>
                         <td class='col-date'>{r['initial_date']}</td>
                         <td class='col-year'>{r['year']}</td>
                         <td class='col-interest'>{r['interest']}</td>
                         <td class='col-paid'>{r['paid']}</td>
                         <td class='col-balance'>{r['balance']}</td>
-                        <td class='col-bank'>{decrypt(r['bank']) if r['bank'] else ''}</td>
+                        <td class='col-bank' title='{decrypt(r['bank']) if r['bank'] else ''}'>{decrypt(r['bank']) if r['bank'] else ''}</td>
                         <td class='col-payment'>{r['payment_date']}</td>
                     </tr>
                 """
@@ -526,7 +567,3 @@ st.markdown("""
     <p style='font-size: 13px; margin: 0;'>Secure Records System • Protected by encryption</p>
 </div>
 """, unsafe_allow_html=True)
-
-
-
-
