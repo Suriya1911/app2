@@ -321,18 +321,18 @@ with tab3:
         
         # 1. Encrypted text - FIXED
         with col1:
-            line_width = 165
+            line_width = 175
             encrypted_text = "ENCRYPTED RECORDS\n" + "="*line_width + "\n\n"
-            encrypted_text += f"{'LOCATION':<25} | {'NAME':<50} | {'MONTH':<20} | {'DT':<2} | {'YEAR':<8} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
+            encrypted_text += f"{'LOCATION':<25} | {'NAME':<60} | {'MONTH':<20} | {'DT':<2} | {'YEAR':<4} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
             encrypted_text += "="*line_width + "\n"
             
             for r in records:
                 # Truncate and pad to exact column widths
                 loc = r['place'][:25].ljust(25)
-                name = r['name'][:50].ljust(50)
+                name = r['name'][:60].ljust(60)
                 month = r['month'][:20].ljust(20)
                 date = r['initial_date'][:2].ljust(2)
-                year = r['year'][:8].ljust(8)
+                year = r['year'][:4].ljust(4)
                 interest = r['interest'][:5].ljust(5)
                 paid = r['paid'][:5].ljust(5)
                 balance = r['balance'][:5].ljust(5)
@@ -356,35 +356,36 @@ with tab3:
             <html>
             <head>
                 <style>
-                    body { font-family: 'Courier New', monospace; margin: 40px; font-size: 9px; }
-                    h1 { text-align: center; color: #2c3e50; font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; font-size: 18px; }
-                    .meta { text-align: center; color: #7f8c8d; margin-bottom: 40px; font-size: 11px; }
-                    table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+                    body { font-family: 'Courier New', monospace; margin: 20px; font-size: 7px; }
+                    h1 { text-align: center; color: #2c3e50; font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; font-size: 16px; }
+                    .meta { text-align: center; color: #7f8c8d; margin-bottom: 20px; font-size: 9px; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
                     th, td { 
                         border: 1px solid #000; 
-                        padding: 4px 3px; 
+                        padding: 2px 2px; 
                         text-align: left; 
-                        font-size: 8px; 
+                        font-size: 6px; 
                         word-wrap: break-word; 
                         overflow: hidden; 
                         text-overflow: ellipsis;
                         max-width: 0;
                         font-family: 'Courier New', monospace;
                         white-space: pre;
+                        line-height: 1.2;
                     }
-                    th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 9px; }
+                    th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 7px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
-                    .col-location { width: 15%; }
-                    .col-name { width: 30%; }
-                    .col-month { width: 13%; }
+                    .col-location { width: 14%; }
+                    .col-name { width: 34%; }
+                    .col-month { width: 12%; }
                     .col-date { width: 3%; }
-                    .col-year { width: 7%; }
+                    .col-year { width: 4%; }
                     .col-interest { width: 5%; }
                     .col-paid { width: 5%; }
                     .col-balance { width: 5%; }
                     .col-bank { width: 7%; }
-                    .col-payment { width: 8%; }
+                    .col-payment { width: 7%; }
                 </style>
             </head>
             <body>
