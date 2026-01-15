@@ -321,16 +321,16 @@ with tab3:
         
         # 1. Encrypted text - FIXED
         with col1:
-            line_width = 155
+            line_width = 165
             encrypted_text = "ENCRYPTED RECORDS\n" + "="*line_width + "\n\n"
-            encrypted_text += f"{'LOCATION':<25} | {'NAME':<50} | {'MONTH':<15} | {'DT':<2} | {'YEAR':<8} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
+            encrypted_text += f"{'LOCATION':<25} | {'NAME':<50} | {'MONTH':<20} | {'DT':<2} | {'YEAR':<8} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
             encrypted_text += "="*line_width + "\n"
             
             for r in records:
                 # Truncate and pad to exact column widths
                 loc = r['place'][:25].ljust(25)
                 name = r['name'][:50].ljust(50)
-                month = r['month'][:15].ljust(15)
+                month = r['month'][:20].ljust(20)
                 date = r['initial_date'][:2].ljust(2)
                 year = r['year'][:8].ljust(8)
                 interest = r['interest'][:5].ljust(5)
@@ -375,9 +375,9 @@ with tab3:
                     th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 9px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
-                    .col-location { width: 16%; }
+                    .col-location { width: 15%; }
                     .col-name { width: 30%; }
-                    .col-month { width: 12%; }
+                    .col-month { width: 13%; }
                     .col-date { width: 3%; }
                     .col-year { width: 7%; }
                     .col-interest { width: 5%; }
@@ -437,16 +437,16 @@ with tab3:
         
         # 3. Decrypted text - FIXED
         with col3:
-            line_width = 155
+            line_width = 165
             decrypted_text = "DECRYPTED RECORDS\n" + "="*line_width + "\n\n"
-            decrypted_text += f"{'LOCATION':<25} | {'NAME':<50} | {'MONTH':<15} | {'DT':<2} | {'YEAR':<8} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
+            decrypted_text += f"{'LOCATION':<25} | {'NAME':<50} | {'MONTH':<20} | {'DT':<2} | {'YEAR':<8} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
             decrypted_text += "="*line_width + "\n"
             
             for r in records:
                 # Truncate and pad to exact column widths
                 loc = decrypt(r['place'])[:25].ljust(25)
                 name = decrypt(r['name'])[:50].ljust(50)
-                month = (decrypt(r['month']) if r['month'] else '')[:15].ljust(15)
+                month = (decrypt(r['month']) if r['month'] else '')[:20].ljust(20)
                 date = r['initial_date'][:2].ljust(2)
                 year = r['year'][:8].ljust(8)
                 interest = r['interest'][:5].ljust(5)
@@ -491,9 +491,9 @@ with tab3:
                     th { background-color: #27ae60; color: white; font-weight: 600; white-space: nowrap; font-size: 9px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
-                    .col-location { width: 16%; }
+                    .col-location { width: 15%; }
                     .col-name { width: 30%; }
-                    .col-month { width: 12%; }
+                    .col-month { width: 13%; }
                     .col-date { width: 3%; }
                     .col-year { width: 7%; }
                     .col-interest { width: 5%; }
