@@ -365,15 +365,17 @@ with tab3:
                         padding: 1px 1px; 
                         text-align: left; 
                         font-size: 5px; 
-                        word-wrap: break-word; 
                         overflow: hidden; 
                         text-overflow: clip;
                         max-width: 0;
                         font-family: 'Courier New', monospace;
                         white-space: nowrap;
-                        line-height: 1.1;
+                        line-height: 1;
+                        height: 10px;
+                        max-height: 10px;
                     }
-                    th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 6px; }
+                    th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 6px; height: 12px; }
+                    tr { height: 10px; max-height: 10px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
                     .col-location { width: 15%; }
