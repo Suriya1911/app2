@@ -370,6 +370,7 @@ with tab3:
                         text-overflow: ellipsis;
                         max-width: 0;
                         font-family: 'Courier New', monospace;
+                        white-space: pre;
                     }
                     th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 9px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
@@ -485,6 +486,7 @@ with tab3:
                         max-width: 0;
                         font-size: 8px;
                         font-family: 'Courier New', monospace;
+                        white-space: pre;
                     }
                     th { background-color: #27ae60; color: white; font-weight: 600; white-space: nowrap; font-size: 9px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
