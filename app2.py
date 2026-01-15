@@ -321,16 +321,16 @@ with tab3:
         
         # 1. Encrypted text - FIXED
         with col1:
-            line_width = 175
+            line_width = 163
             encrypted_text = "ENCRYPTED RECORDS\n" + "="*line_width + "\n\n"
-            encrypted_text += f"{'LOCATION':<25} | {'NAME':<60} | {'MONTH':<20} | {'DT':<2} | {'YEAR':<4} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
+            encrypted_text += f"{'LOCATION':<25} | {'NAME':<60} | {'MONTH':<8} | {'DT':<2} | {'YEAR':<4} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
             encrypted_text += "="*line_width + "\n"
             
             for r in records:
                 # Truncate and pad to exact column widths
                 loc = r['place'][:25].ljust(25)
                 name = r['name'][:60].ljust(60)
-                month = r['month'][:20].ljust(20)
+                month = r['month'][:8].ljust(8)
                 date = r['initial_date'][:2].ljust(2)
                 year = r['year'][:4].ljust(4)
                 interest = r['interest'][:5].ljust(5)
@@ -376,15 +376,15 @@ with tab3:
                     th { background-color: #34495e; color: white; font-weight: 600; white-space: nowrap; font-size: 6px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
-                    .col-location { width: 14%; }
-                    .col-name { width: 34%; }
-                    .col-month { width: 12%; }
+                    .col-location { width: 15%; }
+                    .col-name { width: 37%; }
+                    .col-month { width: 8%; }
                     .col-date { width: 3%; }
                     .col-year { width: 4%; }
                     .col-interest { width: 5%; }
                     .col-paid { width: 5%; }
                     .col-balance { width: 5%; }
-                    .col-bank { width: 7%; }
+                    .col-bank { width: 8%; }
                     .col-payment { width: 7%; }
                 </style>
             </head>
@@ -438,16 +438,16 @@ with tab3:
         
         # 3. Decrypted text - FIXED
         with col3:
-            line_width = 175
+            line_width = 163
             decrypted_text = "DECRYPTED RECORDS\n" + "="*line_width + "\n\n"
-            decrypted_text += f"{'LOCATION':<25} | {'NAME':<60} | {'MONTH':<20} | {'DT':<2} | {'YEAR':<4} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
+            decrypted_text += f"{'LOCATION':<25} | {'NAME':<60} | {'MONTH':<8} | {'DT':<2} | {'YEAR':<4} | {'INT':<5} | {'PAID':<5} | {'BAL':<5} | {'BANK':<8} | {'PMT':<8}\n"
             decrypted_text += "="*line_width + "\n"
             
             for r in records:
                 # Truncate and pad to exact column widths
                 loc = decrypt(r['place'])[:25].ljust(25)
                 name = decrypt(r['name'])[:60].ljust(60)
-                month = (decrypt(r['month']) if r['month'] else '')[:20].ljust(20)
+                month = (decrypt(r['month']) if r['month'] else '')[:8].ljust(8)
                 date = r['initial_date'][:2].ljust(2)
                 year = r['year'][:4].ljust(4)
                 interest = r['interest'][:5].ljust(5)
@@ -493,15 +493,15 @@ with tab3:
                     th { background-color: #27ae60; color: white; font-weight: 600; white-space: nowrap; font-size: 6px; }
                     tr:nth-child(even) { background-color: #f8f9fa; }
                     tr:hover { background-color: #e9ecef; }
-                    .col-location { width: 14%; }
-                    .col-name { width: 34%; }
-                    .col-month { width: 12%; }
+                    .col-location { width: 15%; }
+                    .col-name { width: 37%; }
+                    .col-month { width: 8%; }
                     .col-date { width: 3%; }
                     .col-year { width: 4%; }
                     .col-interest { width: 5%; }
                     .col-paid { width: 5%; }
                     .col-balance { width: 5%; }
-                    .col-bank { width: 7%; }
+                    .col-bank { width: 8%; }
                     .col-payment { width: 7%; }
                 </style>
             </head>
